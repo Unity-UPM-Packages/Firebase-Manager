@@ -1,7 +1,21 @@
 {
   "dependencies": {
+    "com.google.firebase.analytics": "12.4.0",
+    "com.google.firebase.app": "12.4.0",
+    "com.google.firebase.remote-config": "12.4.0",
+    "com.thelegends.unity.patterns": "1.0.0",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.test-framework": "1.1.33"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "TripSoft",
+      "url": "https://verdaccio.tripdev.io",
+      "scopes": [
+        "com.thelegends",
+        "com.google"
+      ]
+    }
+  ]
 }
