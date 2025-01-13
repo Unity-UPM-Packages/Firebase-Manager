@@ -1,0 +1,14 @@
+{
+    "name": "com.thelegends.firebase.manager",
+    "rootNamespace": "com.thelegends.firebase.manager",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
