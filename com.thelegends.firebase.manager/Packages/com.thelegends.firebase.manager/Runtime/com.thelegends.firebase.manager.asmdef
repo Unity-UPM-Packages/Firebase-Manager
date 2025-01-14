@@ -1,7 +1,9 @@
 {
     "name": "com.thelegends.firebase.manager",
     "rootNamespace": "com.thelegends.firebase.manager",
-    "references": [],
+    "references": [
+        "GUID:b9892e19a741c2c4690060e4a6416aca"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
