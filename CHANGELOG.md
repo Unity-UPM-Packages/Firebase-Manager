@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.0...v1.0.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* update Defome Cpmstraints ([21361c1](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/21361c1ee183c1cb4d9407eee866df9bfe377e57))
+
 # 1.0.0 (2025-01-14)
 
 
