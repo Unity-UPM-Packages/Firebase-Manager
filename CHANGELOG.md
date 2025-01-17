@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.1...v1.0.2) (2025-01-17)
+
+
+### Bug Fixes
+
+* improve Firebase Init ([97aab79](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/97aab79e4f034129e40b96725ceaf01d99c58e0e))
+
 ## [1.0.1](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.0...v1.0.1) (2025-01-16)
 
 
