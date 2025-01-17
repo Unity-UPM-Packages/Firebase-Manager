@@ -31,7 +31,12 @@ namespace TheLegends.Base.Firebase
             }
         }
 
-        public IEnumerator Init(Dictionary<string, object> remoteDefaultConfig = null)
+        public void Init()
+        {
+            StartCoroutine(DoInit());
+        }
+
+        public IEnumerator DoInit(Dictionary<string, object> remoteDefaultConfig = null)
         {
 #if USE_FIREBASE
             if (Status == FirebaseStatus.Initializing)
