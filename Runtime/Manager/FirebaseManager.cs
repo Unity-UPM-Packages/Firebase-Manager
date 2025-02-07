@@ -189,10 +189,14 @@ namespace TheLegends.Base.Firebase
 
                         FirebaseAnalytics.LogEvent(eventName, param);
 
+                        string paramStr = "";
+
                         foreach (var par in parameters)
                         {
-                            Debug.Log(TAG + " Param " + par.Key + " " + par.Value);
+                            paramStr += par.Key + " " + par.Value + " | ";
                         }
+
+                        Debug.Log(TAG + " Param " + paramStr);
                     }
                 }
             }
