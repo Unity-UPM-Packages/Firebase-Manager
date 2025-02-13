@@ -157,6 +157,8 @@ namespace TheLegends.Base.Firebase
 
             try
             {
+                Debug.Log(TAG + " Log Event " + eventName);
+
                 if (parameters != null)
                 {
                     var param = parameters.Select(x =>
@@ -185,7 +187,6 @@ namespace TheLegends.Base.Firebase
 
                     if (param != null)
                     {
-                        Debug.Log(TAG + " Log Event " + eventName);
 
                         FirebaseAnalytics.LogEvent(eventName, param);
 
@@ -198,6 +199,10 @@ namespace TheLegends.Base.Firebase
 
                         Debug.Log(TAG + " Param " + paramStr);
                     }
+                }
+                else
+                {
+                    FirebaseAnalytics.LogEvent(eventName);
                 }
             }
             catch (FirebaseException ex)
