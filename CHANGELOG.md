@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.4...v1.0.5) (2025-02-17)
+
+
+### Bug Fixes
+
+* change package.json info ([51e0315](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/51e03150c1c7a9d00dd97c6d471970774f9a7085))
+
 ## [1.0.4](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.3...v1.0.4) (2025-02-17)
 
 
