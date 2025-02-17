@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.3...v1.0.4) (2025-02-17)
+
+
+### Bug Fixes
+
+* improve log firebase ([f0be725](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/f0be7254c599e5acf4854aacf3eaa1a88ff31f6c))
+
 ## [1.0.3](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.2...v1.0.3) (2025-02-07)
 
 
