@@ -4,7 +4,6 @@
   "description": "Firebase Manager used in the project.",
   "keywords": [],
   "version": "1.0.4",
-  "unity": "2022.3",
   "documentationUrl": "https://github.com/Unity-UPM-Packages/Firebase-Manager#documentation",
   "changelogUrl": "https://github.com/Unity-UPM-Packages/Firebase-Manager/releases",
   "license": "MIT",
@@ -22,16 +21,6 @@
     "com.google.firebase.app": "12.4.0",
     "com.google.firebase.remote-config": "12.4.0",
     "com.google.firebase.crashlytics": "12.4.0",
-    "com.thelegends.unity.patterns": "1.0.0"
-  },
-  "scopedRegistries": [
-    {
-      "name": "TripSoft",
-      "url": "https://verdaccio.tripdev.io",
-      "scopes": [
-        "com.thelegends",
-        "com.google"
-      ]
-    }
-  ]
+    "com.thelegends.unity.patterns": "1.0.2"
+  }
 }
