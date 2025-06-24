@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.boxqkrtm.ide.cursor": "https://github.com/boxqkrtm/com.unity.ide.cursor.git",
     "com.google.firebase.analytics": "12.4.0",
     "com.google.firebase.app": "12.4.0",
     "com.google.firebase.crashlytics": "12.4.0",
@@ -12,7 +13,7 @@
   "scopedRegistries": [
     {
       "name": "TripSoft",
-      "url": "https://verdaccio.tripdev.io",
+      "url": "https://verdaccio.thelegends.io.vn",
       "scopes": [
         "com.thelegends",
         "com.google"
