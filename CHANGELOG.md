@@ -1,3 +1,11 @@
+## [1.0.8](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.7...v1.0.8) (2025-06-24)
+
+
+### Bug Fixes
+
+* remove Define Constraints ([a96ec7c](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/a96ec7ca7bc42f2a752ec4b50382b10db9116b0c))
+* removeunused ([8293f96](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/8293f967870c0cbe6ba3c2a77d602556c409c4de))
+
 ## [1.0.7](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.6...v1.0.7) (2025-02-18)
 
 
