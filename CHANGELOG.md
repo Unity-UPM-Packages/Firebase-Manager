@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.8...v1.0.9) (2025-11-10)
+
+
+### Bug Fixes
+
+* Action OnFetchFailed remote config ([990a805](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/990a8055815b3c261c6de6c27913a818e7a24c90))
+
 ## [1.0.8](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.7...v1.0.8) (2025-06-24)
 
 
