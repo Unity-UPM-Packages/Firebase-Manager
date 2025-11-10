@@ -221,7 +221,7 @@ namespace TheLegends.Base.Firebase
 
         #region Firebase Remote
 
-        public void FetchRemoteData(Action OnFetchCompleted, int cacheExpirationHours = 12)
+        public void FetchRemoteData(Action OnFetchCompleted, Action OnFetchFailed, int cacheExpirationHours = 12)
         {
 #if USE_FIREBASE
             if (Status != FirebaseStatus.Initialized)
@@ -236,6 +236,7 @@ namespace TheLegends.Base.Firebase
                 {
                     if (!task.IsCompleted) {
                         Debug.LogError("Retrieval hasn't finished.");
+                        OnFetchFailed?.Invoke();
                         return;
                     }
 
@@ -243,6 +244,7 @@ namespace TheLegends.Base.Firebase
                     var info = remoteConfig.Info;
                     if (info.LastFetchStatus != LastFetchStatus.Success) {
                         Debug.LogError($"{nameof(task)} was unsuccessful\n{nameof(info.LastFetchStatus)}: {info.LastFetchStatus}");
+                        OnFetchFailed?.Invoke();
                         return;
                     }
 
@@ -251,6 +253,7 @@ namespace TheLegends.Base.Firebase
                     {
                         OnFetchCompleted?.Invoke();
                         Debug.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}.");
+                        return;
                     });
                 });
             }
