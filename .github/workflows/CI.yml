@@ -7,10 +7,13 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    env:
+      PACKAGE_PATH: com.thelegends.firebase.manager/Packages/com.thelegends.firebase.manager
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Semantic release
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
@@ -21,12 +24,27 @@ jobs:
           branch: master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create upm branch
-        uses: RageAgainstThePixel/upm-subtree-split@v1
-      - name: Create upm git tag
+
+      - name: Setup Node.js
+        if: steps.semantic.outputs.new_release_published == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://${{ secrets.VERDACCIO_URL }}'
+
+      - name: Publish to Verdaccio
+        if: steps.semantic.outputs.new_release_published == 'true'
+        working-directory: ${{ env.PACKAGE_PATH }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+          VERDACCIO_URL: ${{ secrets.VERDACCIO_URL }}
+
+      - name: Create UPM Branch
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
-          git tag $TAG upm
-          git push origin --tags
-        env:
-          TAG: upm/v${{ steps.semantic.outputs.new_release_version }}
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git subtree split --prefix=${{ env.PACKAGE_PATH }} -b upm
+          git push origin upm --force
+
