@@ -17,10 +17,10 @@
     "url": "https://github.com/Unity-UPM-Packages"
   },
   "dependencies": {
-    "com.google.firebase.analytics": "12.4.0",
-    "com.google.firebase.app": "12.4.0",
-    "com.google.firebase.remote-config": "12.4.0",
-    "com.google.firebase.crashlytics": "12.4.0",
+    "com.google.firebase.analytics": "12.10.1",
+    "com.google.firebase.app": "12.10.1",
+    "com.google.firebase.remote-config": "12.10.1",
+    "com.google.firebase.crashlytics": "12.10.1",
     "com.thelegends.unity.patterns": "1.0.1"
   }
 }

@@ -168,16 +168,20 @@ namespace TheLegends.Base.Firebase
                             if (x.Value is float)
                             {
                                 return new Parameter(x.Key.ToLower(), (float)x.Value);
-                            } else if (x.Value is double)
+                            }
+                            else if (x.Value is double)
                             {
                                 return new Parameter(x.Key.ToLower(), (double)x.Value);
-                            } else if (x.Value is long)
+                            }
+                            else if (x.Value is long)
                             {
                                 return new Parameter(x.Key.ToLower(), (long)x.Value);
-                            } else if (x.Value is int)
+                            }
+                            else if (x.Value is int)
                             {
                                 return new Parameter(x.Key.ToLower(), (int)x.Value);
-                            } else if (x.Value is string)
+                            }
+                            else if (x.Value is string)
                             {
                                 return new Parameter(x.Key.ToLower(), x.Value.ToString());
                             }
@@ -234,7 +238,8 @@ namespace TheLegends.Base.Firebase
             {
                 FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.FromHours(cacheExpirationHours)).ContinueWithOnMainThread(task =>
                 {
-                    if (!task.IsCompleted) {
+                    if (!task.IsCompleted)
+                    {
                         Debug.LogError("Retrieval hasn't finished.");
                         OnFetchFailed?.Invoke();
                         return;
@@ -242,7 +247,8 @@ namespace TheLegends.Base.Firebase
 
                     var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
                     var info = remoteConfig.Info;
-                    if (info.LastFetchStatus != LastFetchStatus.Success) {
+                    if (info.LastFetchStatus != LastFetchStatus.Success)
+                    {
                         Debug.LogError($"{nameof(task)} was unsuccessful\n{nameof(info.LastFetchStatus)}: {info.LastFetchStatus}");
                         OnFetchFailed?.Invoke();
                         return;
@@ -333,16 +339,43 @@ namespace TheLegends.Base.Firebase
 
 
         #endregion
-    }
 
-    public enum FirebaseStatus
-    {
-        None = 0,
-        Available = 1,
-        Initializing = 2,
-        Initialized = 3,
-        InitializeFailed = 4,
-        Fetching = 5,
-        Fetched = 6,
+        #region Firebase User Property
+        public void SetUserProperty(string name, string property)
+        {
+#if USE_FIREBASE
+            if (Status != FirebaseStatus.Initialized)
+            {
+                Debug.LogWarning("Firebase not initialized");
+                return;
+            }
+
+            try
+            {
+                FirebaseAnalytics.SetUserProperty(name, property);
+                Debug.Log(TAG + " Set User Property " + name + " : " + property);
+            }
+            catch (FirebaseException ex)
+            {
+                Debug.LogError(TAG + " SetUserProperty FirebaseException: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(TAG + " SetUserProperty Exception: " + ex.Message);
+            }
+#endif
+        }
+        #endregion
+
+        public enum FirebaseStatus
+        {
+            None = 0,
+            Available = 1,
+            Initializing = 2,
+            Initialized = 3,
+            InitializeFailed = 4,
+            Fetching = 5,
+            Fetched = 6,
+        }
     }
 }
