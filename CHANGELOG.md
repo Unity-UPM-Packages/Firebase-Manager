@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.10...v1.0.11) (2026-07-03)
+
+
+### Bug Fixes
+
+* fetch fail no internet stuck ([c2f8ef4](https://github.com/Unity-UPM-Packages/Firebase-Manager/commit/c2f8ef47f611133606c7b8c6687c3925a3f99581))
+
 ## [1.0.10](https://github.com/Unity-UPM-Packages/Firebase-Manager/compare/v1.0.9...v1.0.10) (2025-11-18)
 
 
