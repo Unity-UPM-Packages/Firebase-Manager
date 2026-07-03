@@ -228,42 +228,58 @@ namespace TheLegends.Base.Firebase
         public void FetchRemoteData(Action OnFetchCompleted, Action OnFetchFailed, int cacheExpirationHours = 12)
         {
 #if USE_FIREBASE
-            if (Status != FirebaseStatus.Initialized)
+            if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                Debug.LogWarning("Firebase not initialized");
+                Debug.LogWarning(TAG + " No internet connection. Skip fetching remote config.");
+                OnFetchFailed?.Invoke();
                 return;
             }
 
-            try
+            if (Status != FirebaseStatus.Initialized)
             {
-                FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.FromHours(cacheExpirationHours)).ContinueWithOnMainThread(task =>
-                {
-                    if (!task.IsCompleted)
-                    {
-                        Debug.LogError("Retrieval hasn't finished.");
-                        OnFetchFailed?.Invoke();
-                        return;
-                    }
-
-                    var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
-                    var info = remoteConfig.Info;
-                    if (info.LastFetchStatus != LastFetchStatus.Success)
-                    {
-                        Debug.LogError($"{nameof(task)} was unsuccessful\n{nameof(info.LastFetchStatus)}: {info.LastFetchStatus}");
-                        OnFetchFailed?.Invoke();
-                        return;
-                    }
-
-                    // Fetch successful. Parameter values must be activated to use.
-                    remoteConfig.ActivateAsync().ContinueWithOnMainThread(task =>
-                    {
-                        OnFetchCompleted?.Invoke();
-                        Debug.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}.");
-                        return;
-                    });
-                });
+                Debug.LogWarning("Firebase not initialized");
+                OnFetchFailed?.Invoke();
+                return;
             }
 
+            StartCoroutine(FetchRemoteDataCoroutine(OnFetchCompleted, OnFetchFailed, cacheExpirationHours, 5f));
+#else
+            OnFetchFailed?.Invoke();
+#endif
+        }
+
+#if USE_FIREBASE
+        private IEnumerator FetchRemoteDataCoroutine(Action OnFetchCompleted, Action OnFetchFailed, int cacheExpirationHours, float timeoutSeconds)
+        {
+            bool? isFetchSuccess = null;
+
+            try
+            {
+                FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.FromHours(cacheExpirationHours))
+                    .ContinueWithOnMainThread(task =>
+                    {
+                        if (task.IsFaulted || task.IsCanceled || !task.IsCompleted)
+                        {
+                            Debug.LogError(TAG + " FetchAsync completed with error or canceled.");
+                            isFetchSuccess = false;
+                            return;
+                        }
+
+                        var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
+                        var info = remoteConfig.Info;
+                        if (info.LastFetchStatus != LastFetchStatus.Success)
+                        {
+                            Debug.LogError($"{nameof(task)} was unsuccessful\n{nameof(info.LastFetchStatus)}: {info.LastFetchStatus}");
+                            isFetchSuccess = false;
+                            return;
+                        }
+
+                        remoteConfig.ActivateAsync().ContinueWithOnMainThread(activateTask =>
+                        {
+                            isFetchSuccess = true;
+                        });
+                    });
+            }
             catch (FirebaseException ex)
             {
                 Debug.LogError(TAG + "DoFetchRemoteData FirebaseException: " + ex.Message);
@@ -271,10 +287,31 @@ namespace TheLegends.Base.Firebase
             catch (Exception ex)
             {
                 Debug.LogError(TAG + "DoFetchRemoteData Exception: " + ex.Message);
+                isFetchSuccess = false;
             }
-#endif
 
+            float elapsed = 0f;
+            while (isFetchSuccess == null && elapsed < timeoutSeconds)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            if (isFetchSuccess == true)
+            {
+                OnFetchCompleted?.Invoke();
+                Debug.Log($"Remote data loaded and ready for use.");
+            }
+            else
+            {
+                if (isFetchSuccess == null)
+                {
+                    Debug.LogWarning(TAG + " Fetch remote config timed out.");
+                }
+                OnFetchFailed?.Invoke();
+            }
         }
+#endif
 
         public string RemoteGetValueString(string title, string defaultValue)
         {
